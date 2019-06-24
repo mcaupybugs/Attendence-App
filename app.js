@@ -6,6 +6,7 @@ var LocalStrategy=require('passport-local');
 var passportLocalMongoose=require('passport-local-mongoose');
 var mongoose=require('mongoose');
 var User=require('./models/user');
+var flash=require('connect-flash');
 
 var authRoutes=require('./routes/index');
 var attendenceRoutes=require('./routes/attendence');
@@ -22,6 +23,7 @@ app.use(express.static("public"));
 app.set("view engine","ejs");
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash());
 
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
@@ -30,6 +32,13 @@ passport.deserializeUser(User.deserializeUser());
 app.use(bodyParser.urlencoded({extended:true}));
 
 app.use('/',express.static(__dirname+'/'));
+
+app.use((req,res,next)=>{
+    res.locals.currentUser=req.user;
+    res.locals.error=req.flash("error");
+    res.locals.success=req.flash("flash");
+    next();
+})
 
 app.use(authRoutes);
 app.use(attendenceRoutes);
