@@ -2,15 +2,16 @@
 
 <div class="content_box">
 	<div class="left_bar">
+  <%subjects.forEach((subject)=>{%>
 	    <ul class=" nav-tabs--vertical nav" role="navigation">
 		<li class="nav-item">
-			<a href="#lorem" class="nav-link active" data-toggle="tab" role="tab" aria-controls="lorem">Lorem</a>
+			<a href="#<%=subject.name%>" class="nav-link" data-toggle="tab" role="tab" aria-controls="lorem"><%=subject.name%></a>
 		</li>
 	</ul>
 	</div>
     <div class="right_bar ">
         	<div class="tab-content ">
-		<div class="tab-pane fade show active" id="lorem" role="tabpanel">
+		<div class="tab-pane fade show active" id="<%=subject.name%>" role="tabpanel">
 <table class="table table-bordered">
     <thead>
       <tr>
@@ -22,14 +23,17 @@
     </thead>
     <tbody>
       <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>john@example.com</td>
+        <td><%=subject.teacher%></td>
+        <td><%=subject.present%></td>
+        <td><%=subject.total%></td>
         <td>100%</td>
       </tr>
     </tbody>
   </table>
+  <%});%>
 	    </div>
-	</div>
+  </div>
+  <a class="nav-link btn btn-dark" href="/subject">Add Subject</a>
     </div>
 </div>
+

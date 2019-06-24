@@ -6,15 +6,15 @@ var Subject=require("../models/subject");
 
 //==========================================
 
-router.get('/',(req,res)=>{
-    // Subject.find({'_id':{$in:req.user.subject}},(err,subject)=>{
-    //     if(err){
-    //         console.log(err);
-    //     }else{
-    //         res.render('home',{subjects:subject});
-    //     }
-    // })
-    res.render('home');
+router.get('/',isLoggedIn,(req,res)=>{
+    Subject.find({'_id':{$in:req.user.subject}},(err,subject)=>{
+        console.log(subject);
+        if(err){
+            console.log(err);
+        }else{
+            res.render('home',{subjects:subject});
+        }
+    })
 })
 //==================================================
 
