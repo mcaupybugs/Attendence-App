@@ -34,7 +34,26 @@ router.post('/welcome',isLoggedIn,(req,res)=>{
         }
     })
 })
+
 //=====================================================
+
+router.get("/subject",isLoggedIn,(req,res)=>{
+    res.render('subject');
+})
+
+router.post('/subject',isLoggedIn,(req,res)=>{
+    Subject.create(req.body.subject,(err,newUser)=>{
+        if(err){
+            res.render('welcome');
+        }else{
+            req.user.subject.push(newUser);
+            req.user.save();
+            res.render('home');
+        }
+    })
+})
+
+//====================================================
 
 //Middleware
 function isLoggedIn(req,res,next){

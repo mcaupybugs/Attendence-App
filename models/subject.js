@@ -3,8 +3,9 @@ var mongoose=require('mongoose');
 
 var subjectSchema=new mongoose.Schema({
    name:String,
-   Total:Number,
-   Present:Number
+   teacher:String,
+   total:Number,
+   present:Number
 });
 
 
