@@ -1,4 +1,6 @@
 var mongoose=require('mongoose');
+var Info=require("./info");
+var Subject=require("./subject");
 var passportLocalMongoose=require('passport-local-mongoose');
 
 var userSchema=new mongoose.Schema({
@@ -9,9 +11,9 @@ var userSchema=new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:'Subject'
     }],
-    Info:[{
+    info:[{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'Subject'
+        ref:'Info'
     }]
 });
 

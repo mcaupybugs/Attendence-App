@@ -4,11 +4,11 @@ var User=require("../models/user");
 var passport=require("passport");
 
 //===============================================
-router.get("/login",(req,res)=>{
+router.get("/login",isLoggedOut,(req,res)=>{
     res.render("login");
 })
 
-router.post("/login",passport.authenticate("local",
+router.post("/login",isLoggedOut,passport.authenticate("local",
 {
     successRedirect:"/",
     failureRedirect:"/login"
@@ -16,26 +16,26 @@ router.post("/login",passport.authenticate("local",
 });
 
 //=================================================
-router.get("/logout",(req,res)=>{
+router.get("/logout",isLoggedIn,(req,res)=>{
     req.logout();
     req.flash("success","Logged you out successfully");
-    res.redirect("/");
+    res.redirect("/login");
 });
 
 //================================================
 
 
-router.get("/register",(req,res)=>{
+router.get("/register",isLoggedOut,(req,res)=>{
     res.render("register");
 })
 
-router.post("/register",(req,res)=>{
+router.post("/register",isLoggedOut,(req,res)=>{
     User.register(new User({username:req.body.username}),req.body.password,(err,user)=>{
         if(err){
             return res.render("register");
         }else{
             passport.authenticate("local")(req,res,()=>{
-                res.render("login");
+                res.render("welcome");
             });
         }
     });
@@ -53,4 +53,12 @@ function isLoggedIn(req,res,next){
         res.flash("error","Please log in first");
     }
 }
+function isLoggedOut(req,res,next){
+    if(!req.isAuthenticated()){
+        return next();
+    }else{
+        req.flash("damn","Already logged in");
+        res.redirect("/");
+    }
+};
 module.exports=router;
