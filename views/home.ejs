@@ -1,5 +1,5 @@
 <%include ./partials/header%>
-
+<div class="container">
 <div class="content_box">
     <div class="right_bar ">
         	<div class="tab-content ">
@@ -20,7 +20,17 @@
         <td><%=subject.teacher%></td>
         <td><%=subject.present%></td>
         <td><%=subject.total%></td>
-        <td>100%</td>
+        <td><%=Math.round((subject.present/subject.total)*100)%></td>
+        <td>
+        <div class="form-inline">
+          <div class="form-group">
+        <form action="/subject/<%=subject._id%>/delete?_method=DELETE" method="POST">
+          <a href="/subject/<%=subject._id%>/edit"><i class="fas fa-edit fa-2x"></i></a>
+          <button type="submit" class="btn btn-dark float-right rounded-circle"><i class="far fa-trash-alt"></i></button>
+        </form>
+        </div>
+        </div>
+        </td>
       </tr>
     </tbody>
   </table>
@@ -29,4 +39,4 @@
   <a class="nav-link btn btn-dark" href="/subject">Add Subject</a>
     </div>
 </div>
-
+</div>

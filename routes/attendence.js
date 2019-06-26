@@ -8,7 +8,6 @@ var Subject=require("../models/subject");
 
 router.get('/',isLoggedIn,(req,res)=>{
     Subject.find({'_id':{$in:req.user.subject}},(err,subject)=>{
-        console.log(subject);
         if(err){
             console.log(err);
         }else{
@@ -49,6 +48,43 @@ router.post('/subject',isLoggedIn,(req,res)=>{
             req.user.subject.push(newUser);
             req.user.save();
             res.redirect('/');
+        }
+    })
+})
+
+//Edit Route
+router.get("/subject/:id/edit",isLoggedIn,(req,res)=>{
+    Subject.findById(req.params.id,(err,foundSubject)=>{
+        if(err){
+            console.log(err);
+            res.redirect('/subject');
+        }else{
+            res.render("subject/edit",{subject:foundSubject});
+        }
+    })
+})
+
+//Update Route
+
+router.put("/subject/:id",isLoggedIn,(req,res)=>{
+    Subject.findByIdAndUpdate(req.params.id,req.body.subject,(err,UpdateSubject)=>{
+        if(err){
+            res.redirect('/subject');
+        }else{
+            res.redirect('/');
+        }
+    })
+});
+
+//Destroy Route
+
+router.delete("/subject/:id/delete",isLoggedIn,(req,res)=>{
+    Subject.findByIdAndRemove(req.params.id,(err,deleteCar)=>{
+        if(err){
+            console.log(err);
+            res.redirect('/');
+        }else{
+            res.redirect('/')
         }
     })
 })

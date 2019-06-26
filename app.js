@@ -4,6 +4,7 @@ var bodyParser=require("body-parser");
 var passport=require('passport');
 var LocalStrategy=require('passport-local');
 var passportLocalMongoose=require('passport-local-mongoose');
+var methodOverride=require("method-override");
 var mongoose=require('mongoose');
 var User=require('./models/user');
 var flash=require('connect-flash');
@@ -20,6 +21,8 @@ app.use(require("express-session")({
     saveUninitialized:false
 }));
 
+
+app.use(methodOverride("_method"));
 app.use(express.static("public"));
 app.set("view engine","ejs");
 app.use(passport.initialize());
