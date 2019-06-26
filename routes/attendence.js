@@ -30,7 +30,7 @@ router.post('/welcome',isLoggedIn,(req,res)=>{
         }else{
             req.user.info.push(newUser);
             req.user.save();
-            res.render('home');
+            res.redirect('subject');
         }
     })
 })
@@ -48,7 +48,7 @@ router.post('/subject',isLoggedIn,(req,res)=>{
         }else{
             req.user.subject.push(newUser);
             req.user.save();
-            res.render('home');
+            res.redirect('/');
         }
     })
 })
