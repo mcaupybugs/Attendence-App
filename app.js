@@ -12,7 +12,7 @@ var flash=require('connect-flash');
 var authRoutes=require('./routes/index');
 var attendenceRoutes=require('./routes/attendence');
 
-// mongoose.connect("mongodb://localhost/attendence");
+//mongoose.connect("mongodb://localhost/attendence");
 mongoose.connect(process.env.DATABASEURL);
 
 app.use(require("express-session")({

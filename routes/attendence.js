@@ -76,6 +76,52 @@ router.put("/subject/:id",isLoggedIn,(req,res)=>{
     })
 });
 
+//Render Add Present
+router.get("/subject/:id/edit/add",isLoggedIn,(req,res)=>{
+    Subject.findById(req.params.id,(err,foundSubject)=>{
+        if(err){
+            console.log(err);
+            res.redirect('/subject');
+        }else{
+            res.render("subject/add",{subject:foundSubject});
+        }
+    })
+})
+
+//Add route
+router.put("/subject/:id/add",isLoggedIn,(req,res)=>{
+    Subject.findByIdAndUpdate(req.params.id,req.body.subject,(err,UpdateSubject)=>{
+        if(err){
+            res.redirect('/subject');
+        }else{
+            res.redirect('/');
+        }
+    })
+});
+
+//Render add total
+router.get("/subject/:id/edit/add_total",isLoggedIn,(req,res)=>{
+    Subject.findById(req.params.id,(err,foundSubject)=>{
+        if(err){
+            console.log(err);
+            res.redirect('/subject');
+        }else{
+            res.render("subject/add_total",{subject:foundSubject});
+        }
+    })
+})
+
+//Total Add Route
+router.put("/subject/:id/add_total",isLoggedIn,(req,res)=>{
+    Subject.findByIdAndUpdate(req.params.id,req.body.subject,(err,UpdateSubject)=>{
+        if(err){
+            res.redirect('/subject');
+        }else{
+            res.redirect('/');
+        }
+    })
+});
+
 //Destroy Route
 
 router.delete("/subject/:id/delete",isLoggedIn,(req,res)=>{

@@ -18,8 +18,8 @@
       <tr>
         <td><%=subject.name%></td>
         <td><%=subject.teacher%></td>
-        <td><%=subject.present%></td>
-        <td><%=subject.total%></td>
+        <td><%=subject.present%><a href="/subject/<%=subject._id%>/edit/add" class="btn btn-dark" style="float:right"><i class="fas fa-plus"></i></a></td>
+        <td><%=subject.total%><a href="/subject/<%=subject._id%>/edit/add_total" class="btn btn-dark" style="float:right"><i class="fas fa-plus"></i></a></td>
         <td><%=Math.round((subject.present/subject.total)*100)%></td>
         <td>
         <div class="form-inline">
