@@ -1,13 +1,13 @@
-var mongoose=require("mongoose");
+var mongoose = require("mongoose");
 
-var infoSchema=new mongoose.Schema({
-    name:String,
-    email:String,
-    college:String,
-    branch:String,
-    phone:Number
+var infoSchema = new mongoose.Schema({
+    username: String,
+    email: String,
+    college: String,
+    branch: String,
+    phone: Number
 });
 
-var Info=mongoose.model("Info",infoSchema);
+var Info = mongoose.model("Info", infoSchema);
 
-module.exports=Info;
+module.exports = Info;
