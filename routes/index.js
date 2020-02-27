@@ -35,11 +35,11 @@ router.post("/register", isLoggedOut, (req, res) => {
             return res.render("register");
         } else {
             passport.authenticate("local")(req, res, () => {
+                user.email = req.body.email;
+
                 res.render("welcome", { user: user });
             });
-            user.email = req.body.email;
-            console.log(user);
-            user.save();
+
         }
     });
 });
