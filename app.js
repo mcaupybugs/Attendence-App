@@ -13,7 +13,13 @@ var authRoutes = require('./routes/index');
 var attendanceRoutes = require('./routes/attendance');
 
 //mongoose.connect("mongodb://localhost/attendance");
-mongoose.connect(process.env.DATABASEURL);
+mongoose.connect("mongodb+srv://mcaupy_bugs:vishal@cluster0-hxm1y.mongodb.net/test?retryWrites=true&w=majority", { useNewUrlParser: true })
+    .then(() => {
+        console.log('enjoy');
+    })
+    .catch((err) => {
+        console.log(err);
+    })
 
 app.use(require("express-session")({
     secret: "My app",
@@ -48,7 +54,7 @@ app.use((req, res, next) => {
 app.use(authRoutes);
 app.use(attendanceRoutes);
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4200;
 
 app.listen(port, () => {
     console.log(`listening on port ${port}`);
